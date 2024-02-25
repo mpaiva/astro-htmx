@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1 class="text-gradient">Astro + HTMX</h1>
+		<p class="instructions">
+			Find a joke by entering a keyword below. The joke will appear below the input field.
+		</p>
+
+<form>
+<label>Keyword:
+  <input
+    type="text"
+    hx-get="https://v2.jokeapi.dev/joke/Any?format=txt&safe-mode"
+    hx-target="#joke-container"
+    name="contains"   
+    hx-trigger="keyup delay:500ms"
+  />
+</label>
+
+<pre class="jokes" id="joke-container">Results will appear here</pre>
+</form>
+
+    
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+
+  .jokes {
+        color: #f8fafc;
+    background-color: rgb(30, 41, 59);
+    overflow-x: auto;
+    font-weight: 400;
+    font-size: .875em;
+    line-height: 1.7142857;
+    margin-top: 1.4285714285714286em;
+    margin-bottom: 2.2857142857142856em;
+    border-radius: .75rem;
+    padding: 1.25rem;
+    box-shadow: 0 4px 6px -1px #0000001a,0 2px 4px -2px #0000001a;
+    display: flex
+  }
+
+</style>
